@@ -264,3 +264,5 @@ const testTriangle = function(height, type, expectedOutput){
 
   testTriangle(6, "right", expectedOutput_6);
 }
+
+console.log("Test passed for pattern_lib.js");

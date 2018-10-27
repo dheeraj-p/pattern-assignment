@@ -46,3 +46,5 @@ testGenerateDiamondLine(0, 5, " ", "*", "*", "  *  ");
 testGenerateDiamondLine(1, 5, " ", "*", "*", " * * ");
 testGenerateDiamondLine(2, 5, " ", "*", "*", "*   *");
 testGenerateDiamondLine(4, 9, " ", "*", "*", "*       *");
+
+console.log("Test passed for pattern_util.js");

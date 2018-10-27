@@ -1,10 +1,59 @@
-const repeat = function (symbol, length){
-  let line = "";
-  for(let count=0; count<length; count++){
-    line += symbol;
+const patternUtil = require("./pattern_util.js");
+const {repeat} = patternUtil;
+const {generateLine} = patternUtil;
+const {generateDiamondLine} = patternUtil;
+
+const generateDiamond = function(height, fillerCharacter){
+  let diamond = ""; 
+  let separator = "";
+  let halfHeight = (height - 1)/2;
+  for(let rowNumber=0; rowNumber<height; rowNumber++){
+    let lineID = rowNumber;
+    if(rowNumber > halfHeight){
+      lineID = height - rowNumber - 1;
+    }
+    diamond += separator + generateDiamondLine(lineID, height, fillerCharacter, "*", "*");
+    separator = "\n";
   }
-  return line;
+  return diamond;
 }
+
+const generateAngledDiamond = function(height){
+  let diamond = "";
+  let separator = "";
+  let halfHeight = (height - 1)/2;
+  for(let rowNumber = 0; rowNumber < height; rowNumber++){
+    let lineID = rowNumber;
+    let firstEdge = "/";
+    let secondEdge = "\\";
+    
+    if(rowNumber > halfHeight){
+      lineID = height - rowNumber - 1;
+      firstEdge = "\\";
+      secondEdge = "/";
+    }
+    let line = generateDiamondLine(lineID, height, " ", firstEdge, secondEdge);
+    if(lineID == 0 || lineID == halfHeight){
+      line = generateDiamondLine(lineID, height, " ", "*", "*");
+    }
+    diamond += separator + line;
+    separator = "\n";
+  }
+  return diamond;
+}
+
+const generateFilledDiamond = function(height){
+  let fillerCharacter = "*";
+  let diamond = generateDiamond(height, fillerCharacter, "*"); 
+  return diamond;
+}
+
+const generateHollowDiamond = function(height){
+  let fillerCharacter = " ";
+  let diamond = generateDiamond(height, fillerCharacter, "*"); 
+  return diamond;
+}
+
 const generateFilledRectangle = function(width, height){
   let rectangle = "";
   let separator = "";
@@ -60,76 +109,6 @@ const generateRightTriangle = function(height, filler){
   }
   triangle += repeat(filler, height);
   return triangle;
-}
-
-const generateLine = function(firstEdgeCharacter, secondEdgeCharacter, fillerCharacter, length){
-  let line = firstEdgeCharacter;
-  line += repeat(fillerCharacter, length - 2);
-  if(length > 1){
-    line += secondEdgeCharacter;
-  }
-  return line;
-}
-
-const generateDiamondLine = function(lineID, height, fillerCharacter, firstEdgeCharacter, secondEdgeCharacter){
-  let line = "";
-  let spacesNeeded = (height - 1)/2 - lineID;
-  let spaces = repeat(" ", spacesNeeded);
-  let lineLength = lineID * 2 + 1;
-  let fillerCharacters = generateLine(firstEdgeCharacter, secondEdgeCharacter, fillerCharacter, lineLength);
-  line += spaces + fillerCharacters + spaces; 
-  return line;
-}
-
-const generateDiamond = function(height, fillerCharacter){
-  let diamond = ""; 
-  let separator = "";
-  let halfHeight = (height - 1)/2;
-  for(let rowNumber=0; rowNumber<height; rowNumber++){
-    let lineID = rowNumber;
-    if(rowNumber > halfHeight){
-      lineID = height - rowNumber - 1;
-    }
-    diamond += separator + generateDiamondLine(lineID, height, fillerCharacter, "*", "*");
-    separator = "\n";
-  }
-  return diamond;
-}
-
-const generateAngledDiamond = function(height){
-  let diamond = "";
-  let separator = "";
-  let halfHeight = (height - 1)/2;
-  for(let rowNumber = 0; rowNumber < height; rowNumber++){
-    let lineID = rowNumber;
-    let firstEdge = "/";
-    let secondEdge = "\\";
-    
-    if(rowNumber > halfHeight){
-      lineID = height - rowNumber - 1;
-      firstEdge = "\\";
-      secondEdge = "/";
-    }
-    let line = generateDiamondLine(lineID, height, " ", firstEdge, secondEdge);
-    if(lineID == 0 || lineID == halfHeight){
-      line = generateDiamondLine(lineID, height, " ", "*", "*");
-    }
-    diamond += separator + line;
-    separator = "\n";
-  }
-  return diamond;
-}
-
-const generateFilledDiamond = function(height){
-  let fillerCharacter = "*";
-  let diamond = generateDiamond(height, fillerCharacter, "*"); 
-  return diamond;
-}
-
-const generateHollowDiamond = function(height){
-  let fillerCharacter = " ";
-  let diamond = generateDiamond(height, fillerCharacter, "*"); 
-  return diamond;
 }
 
 const createDiamond = function(height, type){

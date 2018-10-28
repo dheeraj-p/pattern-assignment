@@ -55,11 +55,10 @@ const generateHollowDiamond = function(height){
 }
 
 const generateFilledRectangle = function(width, height){
-  let rectangle = "";
-  let separator = "";
+  let rectangle = [];
   for(let row = 0; row < height; row++){
-    rectangle += separator + repeat("*", width);
-    separator = "\n";
+    let line = repeat("*", width);
+    rectangle.push(line);
   }
   return rectangle;
 }
@@ -130,7 +129,7 @@ const generateRectangle = function(patternSpecifications){
   let type = patternSpecifications.type;
   let width = patternSpecifications.width;
   let height = patternSpecifications.height;
-  let rectangle = generateFilledRectangle(width, height);
+  let rectangle = generateFilledRectangle(width, height).join("\n");
   if(type == "hollow"){
     rectangle = generateHollowRectangle(width, height);
   } else if(type == "alternating"){

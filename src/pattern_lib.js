@@ -62,11 +62,11 @@ const generateFilledRectangle = function(width, height){
 
 const generateAlternatingRectangle = function(width, height){
   let rectangle = [];
+  let fillers = ["*", "-"];
   for(let row = 0; row < height; row++){
-    let line = repeat("*", width);
-    if(row % 2 == 1){
-      line = repeat("-", width);
-    }
+    let fillerToSelectFrom = row % 2;
+    let filler = fillers[fillerToSelectFrom];
+    let line = repeat(filler, width);
     rectangle.push(line);
   }
   return rectangle;

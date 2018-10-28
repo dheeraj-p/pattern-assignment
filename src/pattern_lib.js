@@ -76,15 +76,13 @@ const generateAlternatingRectangle = function(width, height){
 }
 
 const generateHollowRectangle = function(width, height){
-  let rectangle = "";
-  let separator = "";
+  let rectangle = [];
   for(let row = 0; row < height; row++){
     let line = "*" + repeat(" ", width - 2) + "*";
     if(row == 0 || row == (height - 1)){
       line = repeat("*", width);
     }
-    rectangle += separator  + line;
-    separator = "\n";
+    rectangle.push(line);
   }
   return rectangle;
 }
@@ -129,7 +127,7 @@ const generateRectangle = function(patternSpecifications){
   let height = patternSpecifications.height;
   let rectangle = generateFilledRectangle(width, height).join("\n");
   if(type == "hollow"){
-    rectangle = generateHollowRectangle(width, height);
+    rectangle = generateHollowRectangle(width, height).join("\n");
   } else if(type == "alternating"){
     rectangle = generateAlternatingRectangle(width, height).join("\n");
   }

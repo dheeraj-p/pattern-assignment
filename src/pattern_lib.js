@@ -4,16 +4,15 @@ const {generateLine} = patternUtil;
 const {generateDiamondLine} = patternUtil;
 
 const generateDiamond = function(height, fillerCharacter){
-  let diamond = ""; 
-  let separator = "";
+  let diamond = []; 
   let halfHeight = (height - 1)/2;
   for(let rowNumber=0; rowNumber<height; rowNumber++){
     let lineID = rowNumber;
     if(rowNumber > halfHeight){
       lineID = height - rowNumber - 1;
     }
-    diamond += separator + generateDiamondLine(lineID, height, fillerCharacter, "*", "*");
-    separator = "\n";
+    let line = generateDiamondLine(lineID, height, fillerCharacter, "*", "*");
+    diamond.push(line);
   }
   return diamond;
 }
@@ -112,9 +111,9 @@ const createDiamond = function(patternSpecifications){
   if(height % 2 == 0){
     height--;
   }
-  let diamond = generateFilledDiamond(height);
+  let diamond = generateFilledDiamond(height).join("\n");
   if(type == "hollow"){
-    diamond = generateHollowDiamond(height);
+    diamond = generateHollowDiamond(height).join("\n");
   } else if(type == "angled"){
     diamond = generateAngledDiamond(height);
   }

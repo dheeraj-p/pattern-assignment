@@ -1,6 +1,7 @@
 const patternUtil = require("../src/pattern_util.js");
 const assert = require("assert");
 const {repeat} = patternUtil;
+const {readUserInput} = patternUtil;
 const {generateLine} = patternUtil;
 const {generateDiamondLine} = patternUtil;
 
@@ -46,5 +47,34 @@ testGenerateDiamondLine(0, 5, " ", "*", "*", "  *  ");
 testGenerateDiamondLine(1, 5, " ", "*", "*", " * * ");
 testGenerateDiamondLine(2, 5, " ", "*", "*", "*   *");
 testGenerateDiamondLine(4, 9, " ", "*", "*", "*       *");
+
+//-------------------------- Test generateLine() function------------//
+const testReadUserInput = function(inputArgs, expectedOutput){
+  assert.deepEqual(readUserInput(inputArgs), expectedOutput);
+}
+
+let inputArgs = ["node", "somefile.js", "filled", "20", "7"];
+let expectedOutput = {type : "filled", width : 20, height : 7}
+testReadUserInput(inputArgs, expectedOutput);
+
+inputArgs = ["node", "somefile.js", "hollow", "5", "5"];
+expectedOutput = {type : "hollow", width : 5, height : 5}
+testReadUserInput(inputArgs, expectedOutput);
+
+inputArgs = ["node", "somefile.js", "alternating", "7", "1"];
+expectedOutput = {type : "alternating", width : 7, height : 1}
+testReadUserInput(inputArgs, expectedOutput);
+
+inputArgs = ["node", "somefile.js", "left", "7"];
+expectedOutput = {type : "left", width : 7, height : 7}
+testReadUserInput(inputArgs, expectedOutput);
+
+inputArgs = ["node", "somefile.js", "right", "7"];
+expectedOutput = {type : "right", width : 7, height : 7}
+testReadUserInput(inputArgs, expectedOutput);
+
+inputArgs = ["node", "somefile.js", "filled", "9"];
+expectedOutput = {type : "filled", width : 9, height : 9}
+testReadUserInput(inputArgs, expectedOutput);
 
 console.log("Test passed for pattern_util.js");

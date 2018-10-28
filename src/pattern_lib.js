@@ -111,7 +111,9 @@ const generateRightTriangle = function(height, filler){
   return triangle;
 }
 
-const createDiamond = function(height, type){
+const createDiamond = function(patternSpecifications){
+  let type = patternSpecifications.type;
+  let height = patternSpecifications.height;
   if(height % 2 == 0){
     height--;
   }
@@ -124,7 +126,10 @@ const createDiamond = function(height, type){
   return diamond;
 }
 
-const generateRectangle = function(width, height, type){
+const generateRectangle = function(patternSpecifications){
+  let type = patternSpecifications.type;
+  let width = patternSpecifications.width;
+  let height = patternSpecifications.height;
   let rectangle = generateFilledRectangle(width, height);
   if(type == "hollow"){
     rectangle = generateHollowRectangle(width, height);
@@ -134,13 +139,15 @@ const generateRectangle = function(width, height, type){
   return rectangle;
 }
 
-const generateTriangle = function(height, alignment, filler){
+const generateTriangle = function(patternSpecifications){
+  let alignment = patternSpecifications.type;
+  let height = patternSpecifications.height;
   let isLeftAligned = (alignment == "left");
   let isRightAligned = (alignment == "right");
 
-  let triangle = generateLeftTriangle(height, filler);
+  let triangle = generateLeftTriangle(height, "*");
   if(isRightAligned){
-    triangle = generateRightTriangle(height, filler);
+    triangle = generateRightTriangle(height, "*");
   } 
   return triangle;
 }

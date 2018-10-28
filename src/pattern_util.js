@@ -6,6 +6,16 @@ const repeat = function (symbol, length){
   return line;
 }
 
+const readUserInput = function(args){
+  let patternType = args[2];
+  let patternWidth = +args[3];
+  let patternHeight = +args[4];
+  if(isNaN(patternHeight)){
+    patternHeight = patternWidth;
+  }
+  return {type : patternType, width: patternWidth, height : patternHeight};
+};
+
 const generateLine = function(firstEdgeCharacter, secondEdgeCharacter, fillerCharacter, length){
   let line = firstEdgeCharacter;
   line += repeat(fillerCharacter, length - 2);
@@ -25,7 +35,7 @@ const generateDiamondLine = function(lineID, height, fillerCharacter, firstEdgeC
   return line;
 }
 
-
+exports.readUserInput = readUserInput;
 exports.generateDiamondLine = generateDiamondLine;
 exports.generateLine = generateLine;
 exports.repeat = repeat;

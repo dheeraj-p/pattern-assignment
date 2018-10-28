@@ -93,21 +93,21 @@ const generateHollowRectangle = function(width, height){
 }
 
 const generateLeftTriangle = function(height, filler){
-  let triangle = "";
-  for(let lineLength=1; lineLength<height; lineLength++){
-    triangle += repeat(filler, lineLength) + "\n";
+  let triangle = [];
+  for(let lineLength=1; lineLength<=height; lineLength++){
+    let line = repeat(filler, lineLength);
+    triangle.push(line);
   }
-  triangle += repeat(filler, height);
   return triangle;
 }
 
 const generateRightTriangle = function(height, filler){
-  let triangle = "";
-  for(let lineLength=1; lineLength<height; lineLength++){
-    triangle += repeat(" ", height - lineLength);
-    triangle += repeat(filler, lineLength) + "\n";
+  let triangle = [];
+  for(let lineLength=1; lineLength<=height; lineLength++){
+    let spaces = repeat(" ", height - lineLength);
+    let line = spaces + repeat(filler, lineLength);
+    triangle.push(line);
   }
-  triangle += repeat(filler, height);
   return triangle;
 }
 
@@ -145,9 +145,9 @@ const generateTriangle = function(patternSpecifications){
   let isLeftAligned = (alignment == "left");
   let isRightAligned = (alignment == "right");
 
-  let triangle = generateLeftTriangle(height, "*");
+  let triangle = generateLeftTriangle(height, "*").join("\n");
   if(isRightAligned){
-    triangle = generateRightTriangle(height, "*");
+    triangle = generateRightTriangle(height, "*").join("\n");
   } 
   return triangle;
 }

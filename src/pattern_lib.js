@@ -64,15 +64,13 @@ const generateFilledRectangle = function(width, height){
 }
 
 const generateAlternatingRectangle = function(width, height){
-  let rectangle = "";
-  let separator = "";
+  let rectangle = [];
   for(let row = 0; row < height; row++){
     let line = repeat("*", width);
     if(row % 2 == 1){
       line = repeat("-", width);
     }
-    rectangle += separator + line;
-    separator = "\n";
+    rectangle.push(line);
   }
   return rectangle;
 }
@@ -133,7 +131,7 @@ const generateRectangle = function(patternSpecifications){
   if(type == "hollow"){
     rectangle = generateHollowRectangle(width, height);
   } else if(type == "alternating"){
-    rectangle = generateAlternatingRectangle(width, height); 
+    rectangle = generateAlternatingRectangle(width, height).join("\n");
   }
   return rectangle;
 }

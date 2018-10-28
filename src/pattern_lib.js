@@ -18,8 +18,7 @@ const generateDiamond = function(height, fillerCharacter){
 }
 
 const generateAngledDiamond = function(height){
-  let diamond = "";
-  let separator = "";
+  let diamond = [];
   let halfHeight = (height - 1)/2;
   for(let rowNumber = 0; rowNumber < height; rowNumber++){
     let lineID = rowNumber;
@@ -35,8 +34,7 @@ const generateAngledDiamond = function(height){
     if(lineID == 0 || lineID == halfHeight){
       line = generateDiamondLine(lineID, height, " ", "*", "*");
     }
-    diamond += separator + line;
-    separator = "\n";
+    diamond.push(line);
   }
   return diamond;
 }
@@ -115,7 +113,7 @@ const createDiamond = function(patternSpecifications){
   if(type == "hollow"){
     diamond = generateHollowDiamond(height).join("\n");
   } else if(type == "angled"){
-    diamond = generateAngledDiamond(height);
+    diamond = generateAngledDiamond(height).join("\n");
   }
   return diamond;
 }

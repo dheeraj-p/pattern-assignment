@@ -86,12 +86,10 @@ const createDiamond = function(patternSpecifications){
   if(height % 2 == 0){
     height--;
   }
-  let diamond = generateFilledDiamond(height).join("\n");
-  if(type == "hollow"){
-    diamond = generateHollowDiamond(height).join("\n");
-  } else if(type == "angled"){
-    diamond = generateAngledDiamond(height).join("\n");
-  }
+  let diamondGenerators = {filled : generateFilledDiamond,
+    hollow : generateHollowDiamond,
+    angled : generateAngledDiamond};
+  let diamond = diamondGenerators[type](height).join("\n");
   return diamond;
 }
 

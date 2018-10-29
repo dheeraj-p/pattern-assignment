@@ -2,6 +2,7 @@ const patternUtil = require("./pattern_util.js");
 const {repeat} = patternUtil;
 const {generateLine} = patternUtil;
 const {generateDiamondLine} = patternUtil;
+const {justifyTriangleLine} = patternUtil;
 
 const generateDiamond = function(height, fillerCharacter){
   let diamond = []; 
@@ -84,25 +85,6 @@ const generateHollowRectangle = function(width, height){
   return rectangle;
 }
 
-const generateLeftTriangle = function(height, filler){
-  let triangle = [];
-  for(let lineLength=1; lineLength<=height; lineLength++){
-    let line = repeat(filler, lineLength);
-    triangle.push(line);
-  }
-  return triangle;
-}
-
-const generateRightTriangle = function(height, filler){
-  let triangle = [];
-  for(let lineLength=1; lineLength<=height; lineLength++){
-    let spaces = repeat(" ", height - lineLength);
-    let line = spaces + repeat(filler, lineLength);
-    triangle.push(line);
-  }
-  return triangle;
-}
-
 const createDiamond = function(patternSpecifications){
   let type = patternSpecifications.type;
   let height = patternSpecifications.height;
@@ -131,19 +113,23 @@ const generateRectangle = function(patternSpecifications){
   return rectangle;
 }
 
-const generateTriangle = function(patternSpecifications){
-  let alignment = patternSpecifications.type;
-  let height = patternSpecifications.height;
-  let isLeftAligned = (alignment == "left");
-  let isRightAligned = (alignment == "right");
-
-  let triangle = generateLeftTriangle(height, "*").join("\n");
-  if(isRightAligned){
-    triangle = generateRightTriangle(height, "*").join("\n");
-  } 
+const generateTriangle = function(height, alignment){
+  let triangle = [];
+  for(let lineLength=1; lineLength<=height; lineLength++){
+    let spaces = repeat(" ", height - lineLength);
+    let line = repeat("*", lineLength);
+    let justifiedLine = justifyTriangleLine(spaces, line, alignment);
+    triangle.push(justifiedLine);
+  }
   return triangle;
 }
 
+const getTriangle = function(patternSpecifications){
+  let alignment = patternSpecifications.type;
+  let height = patternSpecifications.height;
+  return generateTriangle(height, alignment).join("\n");
+}
+
 exports.generateRectangle = generateRectangle;
-exports.generateTriangle = generateTriangle;
+exports.getTriangle = getTriangle;
 exports.createDiamond = createDiamond;

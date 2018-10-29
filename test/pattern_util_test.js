@@ -2,6 +2,7 @@ const patternUtil = require("../src/pattern_util.js");
 const assert = require("assert");
 const {repeat} = patternUtil;
 const {readUserInput} = patternUtil;
+const {justifyTriangleLine} = patternUtil;
 const {generateLine} = patternUtil;
 const {generateDiamondLine} = patternUtil;
 
@@ -36,7 +37,7 @@ testGenerateLine("*", "*", " ", 3, "* *");
 testGenerateLine("*", "*", " ", 5, "*   *");
 testGenerateLine("/", "\\", " ", 5, "/   \\");
 
-//-------------------------- Test generateLine() function------------//
+//-------------------------- Test generateDiamondLine() function------------//
 
 const testGenerateDiamondLine = function(lineID, height, filler, firstEdge, secondEdge, expectedOutput){
   assert.equal(generateDiamondLine(lineID, height, filler, firstEdge, secondEdge), expectedOutput);
@@ -48,7 +49,7 @@ testGenerateDiamondLine(1, 5, " ", "*", "*", " * * ");
 testGenerateDiamondLine(2, 5, " ", "*", "*", "*   *");
 testGenerateDiamondLine(4, 9, " ", "*", "*", "*       *");
 
-//-------------------------- Test generateLine() function------------//
+//-------------------------- Test readUserInput() function------------//
 const testReadUserInput = function(inputArgs, expectedOutput){
   assert.deepEqual(readUserInput(inputArgs), expectedOutput);
 }
@@ -76,5 +77,17 @@ testReadUserInput(inputArgs, expectedOutput);
 inputArgs = ["node", "somefile.js", "filled", "9"];
 expectedOutput = {type : "filled", width : 9, height : 9}
 testReadUserInput(inputArgs, expectedOutput);
+
+//-------------------------- Test readUserInput() function------------//
+
+const testJustifyTriangleLine = function(spaces, fillers, type, expectedOutput){
+  assert(justifyTriangleLine(spaces, fillers, type), expectedOutput);
+}
+
+testJustifyTriangleLine("   ","*", "right", "   *");
+testJustifyTriangleLine("   ","*", "left", "*   ");
+testJustifyTriangleLine("   ","***", "right", "   ***");
+testJustifyTriangleLine("   ","***", "left", "***   ");
+testJustifyTriangleLine("   ","******", "right", "   ******");
 
 console.log("Test passed for pattern_util.js");

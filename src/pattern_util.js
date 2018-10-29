@@ -25,6 +25,14 @@ const generateLine = function(firstEdgeCharacter, secondEdgeCharacter, fillerCha
   return line;
 }
 
+const justifyTriangleLine = function(spaces, line, type){
+  let justifiedLine = line + spaces;
+  if(type == "right"){
+    justifiedLine = spaces + line;
+  }
+  return justifiedLine;
+}
+
 const generateDiamondLine = function(lineID, height, fillerCharacter, firstEdgeCharacter, secondEdgeCharacter){
   let line = "";
   let spacesNeeded = (height - 1)/2 - lineID;
@@ -38,4 +46,5 @@ const generateDiamondLine = function(lineID, height, fillerCharacter, firstEdgeC
 exports.readUserInput = readUserInput;
 exports.generateDiamondLine = generateDiamondLine;
 exports.generateLine = generateLine;
+exports.justifyTriangleLine = justifyTriangleLine;
 exports.repeat = repeat;

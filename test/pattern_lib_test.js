@@ -1,7 +1,7 @@
 const assert = require("assert");
 const patternLib = require("../src/pattern_lib.js");
 const {generateRectangle} = patternLib;
-const {generateTriangle} = patternLib;
+const {getTriangle} = patternLib;
 const {createDiamond} = patternLib;
 
 //-------------------------------- Test cases for rectangle pattern -------------------------//
@@ -196,37 +196,37 @@ const testDiamond = function (patternSpecifications, expectedOutput){
 //-------------------------------- Test cases for triangle pattern -------------------------//
 
 const testTriangle = function(patternSpecifications, expectedOutput){
-  assert.equal(generateTriangle(patternSpecifications), expectedOutput);
+  assert.equal(getTriangle(patternSpecifications), expectedOutput);
 }
 
 //----------------------------- Left Triangle Pattern ------------------------------//
 {
-  let expectedOutput_3 = "*\n";
-  expectedOutput_3 +=    "**\n";
+  let expectedOutput_3 = "*  \n";
+  expectedOutput_3 +=    "** \n";
   expectedOutput_3 +=    "***";
 
   testTriangle({type : "left", height : 3}, expectedOutput_3);
 
-  let expectedOutput_4 = "*\n";
-  expectedOutput_4 +=    "**\n";
-  expectedOutput_4 +=    "***\n";
+  let expectedOutput_4 = "*   \n";
+  expectedOutput_4 +=    "**  \n";
+  expectedOutput_4 +=    "*** \n";
   expectedOutput_4 +=    "****";
 
   testTriangle({type : "left", height : 4}, expectedOutput_4);
 
-  let expectedOutput_5 = "*\n";
-  expectedOutput_5 +=    "**\n";
-  expectedOutput_5 +=    "***\n";
-  expectedOutput_5 +=    "****\n";
+  let expectedOutput_5 = "*    \n";
+  expectedOutput_5 +=    "**   \n";
+  expectedOutput_5 +=    "***  \n";
+  expectedOutput_5 +=    "**** \n";
   expectedOutput_5 +=    "*****";
 
   testTriangle({type : "left", height : 5}, expectedOutput_5);
 
-  let expectedOutput_6 = "*\n";
-  expectedOutput_6 +=    "**\n";
-  expectedOutput_6 +=    "***\n";
-  expectedOutput_6 +=    "****\n";
-  expectedOutput_6 +=    "*****\n";
+  let expectedOutput_6 = "*     \n";
+  expectedOutput_6 +=    "**    \n";
+  expectedOutput_6 +=    "***   \n";
+  expectedOutput_6 +=    "****  \n";
+  expectedOutput_6 +=    "***** \n";
   expectedOutput_6 +=    "******";
 
   testTriangle({type : "left", height : 6}, expectedOutput_6);

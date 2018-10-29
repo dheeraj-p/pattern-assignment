@@ -99,12 +99,10 @@ const generateRectangle = function(patternSpecifications){
   let type = patternSpecifications.type;
   let width = patternSpecifications.width;
   let height = patternSpecifications.height;
-  let rectangle = generateFilledRectangle(width, height).join("\n");
-  if(type == "hollow"){
-    rectangle = generateHollowRectangle(width, height).join("\n");
-  } else if(type == "alternating"){
-    rectangle = generateAlternatingRectangle(width, height).join("\n");
-  }
+  let rectangleGenerators = {filled : generateFilledRectangle, 
+    hollow : generateHollowRectangle,
+    alternating : generateAlternatingRectangle};
+  let rectangle = rectangleGenerators[type](width, height).join("\n");
   return rectangle;
 }
 

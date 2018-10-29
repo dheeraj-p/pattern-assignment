@@ -34,12 +34,11 @@ const justifyTriangleLine = function(spaces, line, type){
 }
 
 const generateDiamondLine = function(lineID, height, fillerCharacter, firstEdgeCharacter, secondEdgeCharacter){
-  let line = "";
   let spacesNeeded = (height - 1)/2 - lineID;
   let spaces = repeat(" ", spacesNeeded);
   let lineLength = lineID * 2 + 1;
   let fillerCharacters = generateLine(firstEdgeCharacter, secondEdgeCharacter, fillerCharacter, lineLength);
-  line += spaces + fillerCharacters + spaces; 
+  let line = spaces + fillerCharacters + spaces; 
   return line;
 }
 

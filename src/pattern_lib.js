@@ -7,11 +7,8 @@ const {justifyTriangleLine} = patternUtil;
 const generateDiamond = function(height, fillerCharacter){
   let diamond = []; 
   let halfHeight = (height - 1)/2;
-  for(let rowNumber=0; rowNumber<height; rowNumber++){
-    let lineID = rowNumber;
-    if(rowNumber > halfHeight){
-      lineID = height - rowNumber - 1;
-    }
+  for(let count=-halfHeight; count<=halfHeight; count++){
+    let lineID = halfHeight - Math.abs(count);
     let line = generateDiamondLine(lineID, height, fillerCharacter, "*", "*");
     diamond.push(line);
   }
@@ -21,16 +18,14 @@ const generateDiamond = function(height, fillerCharacter){
 const generateAngledDiamond = function(height){
   let diamond = [];
   let halfHeight = (height - 1)/2;
-  for(let rowNumber = 0; rowNumber < height; rowNumber++){
-    let lineID = rowNumber;
-    let firstEdge = "/";
-    let secondEdge = "\\";
-    
-    if(rowNumber > halfHeight){
-      lineID = height - rowNumber - 1;
-      firstEdge = "\\";
-      secondEdge = "/";
-    }
+  let firstEdges = ["/","\\"];
+  let secondEdges = ["\\","/"];
+  for(let count = -halfHeight; count <= halfHeight; count++){
+    let rowNumber = halfHeight + count;
+    let lineID = halfHeight - Math.abs(count);
+    let indexForEdges = Math.floor(rowNumber/(halfHeight + 1));
+    let firstEdge = firstEdges[indexForEdges];
+    let secondEdge = secondEdges[indexForEdges];
     let line = generateDiamondLine(lineID, height, " ", firstEdge, secondEdge);
     if(lineID == 0 || lineID == halfHeight){
       line = generateDiamondLine(lineID, height, " ", "*", "*");

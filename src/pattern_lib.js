@@ -60,8 +60,7 @@ const generateAlternatingRectangle = function(width, height){
   let rectangle = [];
   let fillers = ["*", "-"];
   for(let row = 0; row < height; row++){
-    let fillerToSelectFrom = row % 2;
-    let filler = fillers[fillerToSelectFrom];
+    let filler = fillers[row % 2];
     let line = repeat(filler, width);
     rectangle.push(line);
   }
@@ -70,11 +69,10 @@ const generateAlternatingRectangle = function(width, height){
 
 const generateHollowRectangle = function(width, height){
   let rectangle = [];
+  let fillers = ["*", " "];
   for(let row = 0; row < height; row++){
-    let line = "*" + repeat(" ", width - 2) + "*";
-    if(row == 0 || row == (height - 1)){
-      line = repeat("*", width);
-    }
+    let filler = fillers[row % (height - 1)] || fillers[1];
+    let line = generateLine("*", "*", filler, width);
     rectangle.push(line);
   }
   return rectangle;

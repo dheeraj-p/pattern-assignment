@@ -26,10 +26,10 @@ const generateAngledDiamond = function(height){
     let indexForEdges = Math.floor(rowNumber/(halfHeight + 1));
     let firstEdge = firstEdges[indexForEdges];
     let secondEdge = secondEdges[indexForEdges];
-    let line = generateDiamondLine(lineID, height, " ", firstEdge, secondEdge);
     if(lineID == 0 || lineID == halfHeight){
-      line = generateDiamondLine(lineID, height, " ", "*", "*");
+      firstEdge = secondEdge = "*";
     }
+    let line = generateDiamondLine(lineID, height, " ", firstEdge, secondEdge);
     diamond.push(line);
   }
   return diamond;

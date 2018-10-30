@@ -3,6 +3,7 @@ const repeat = function (symbol, length){
   for(let count=0; count<length; count++){
     line += symbol;
   }
+  let line = new Array(+length).fill(symbol)symbol.join("");
   return line;
 }
 
